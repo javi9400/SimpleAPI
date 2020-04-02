@@ -7,6 +7,7 @@ using Simple.Api.Services;
 namespace Simple.Api.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class AuthorsController : ControllerBase
     {
         private readonly ICourseLibraryRepository _courseLibraryRepository;
@@ -17,12 +18,11 @@ namespace Simple.Api.Controllers
         }
 
 
-        [HttpGet("api/authors")]
-        public ICollection<Author> GetAuthors()
+        [HttpGet]
+        public ActionResult GetAuthors()
         {
             var authorsFromRepo=_courseLibraryRepository.GetAuthors();
-            return  authorsFromRepo;
-
+            return  new JsonResult(authorsFromRepo);
         }
 
     }

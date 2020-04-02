@@ -6,7 +6,7 @@ using Simple.Api.Entities;
 
 namespace Simple.Api.Services
 {
-    public class CourseLibraryRepository : ICourseLibraryRepository,IDisposable
+    public class CourseLibraryRepository : ICourseLibraryRepository
     {
         private CourseLibraryContext _context;
         public CourseLibraryRepository(CourseLibraryContext context)
@@ -36,14 +36,10 @@ namespace Simple.Api.Services
             _context.SaveChanges();
         }
 
-        public void Dispose()
-        {
-            this.Dispose();
-        }
-
         public ICollection<Author> GetAuthors()
         {
            var authors= _context.Authors.ToList();
+           
            if(authors==null)
            {
                throw new ArgumentNullException();

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Simple.Api.Context;
@@ -9,9 +10,10 @@ using Simple.Api.Context;
 namespace Simple.Api.Migrations
 {
     [DbContext(typeof(CourseLibraryContext))]
-    partial class CourseLibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20200402214644_configuringData")]
+    partial class configuringData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

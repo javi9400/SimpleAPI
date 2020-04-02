@@ -11,9 +11,9 @@ namespace Simple.Api.Entities
 
         public DateTimeOffset DateOfBirth { get; set; }
 
-        public string MaintCategory { get; set; }
+        public string MainCategory { get; set; }
 
-        public ICollection<Course> Courses{get;set;}= new List<Course>();
+        public ICollection<Course> Courses{get;set;}=new List<Course>();
 
     }
 }

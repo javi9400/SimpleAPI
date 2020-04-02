@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Simple.Api.Entities;
 
@@ -20,6 +21,17 @@ namespace Simple.Api.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Course>().HasData(
+                new Course()
+                {
+                        CourseId=1,
+                        Title="The return of the jedi",
+                        Description="Star wars books",
+                        AuthorId=1
+                }
+            );
+
             modelBuilder.Entity<Author>().HasData(
 
                 new Author()
@@ -28,8 +40,8 @@ namespace Simple.Api.Context
                   FirstName="Javier",
                   LastName="Mayorga",
                   DateOfBirth=new DateTime(1994,06,07),
-                  MaintCategory="Science Fiction"
-
+                  MainCategory="Science Fiction"
+                  
                 }
             );
 

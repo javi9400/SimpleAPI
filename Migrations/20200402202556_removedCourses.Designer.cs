@@ -10,8 +10,8 @@ using Simple.Api.Context;
 namespace Simple.Api.Migrations
 {
     [DbContext(typeof(CourseLibraryContext))]
-    [Migration("20200402052902_initia_migration")]
-    partial class initia_migration
+    [Migration("20200402202556_removedCourses")]
+    partial class removedCourses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace Simple.Api.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.Property<string>("MaintCategory")
+                    b.Property<string>("MainCategory")
                         .HasColumnType("text");
 
                     b.HasKey("AuthorId");
@@ -51,7 +51,7 @@ namespace Simple.Api.Migrations
                             DateOfBirth = new DateTimeOffset(new DateTime(1994, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -6, 0, 0, 0)),
                             FirstName = "Javier",
                             LastName = "Mayorga",
-                            MaintCategory = "Science Fiction"
+                            MainCategory = "Science Fiction"
                         });
                 });
 
@@ -76,12 +76,21 @@ namespace Simple.Api.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            CourseId = 1,
+                            AuthorId = 1,
+                            Description = "Star wars books",
+                            Title = "The return of the jedi"
+                        });
                 });
 
             modelBuilder.Entity("Simple.Api.Entities.Course", b =>
                 {
                     b.HasOne("Simple.Api.Entities.Author", "Author")
-                        .WithMany("Courses")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
