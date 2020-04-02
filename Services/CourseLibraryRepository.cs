@@ -41,7 +41,7 @@ namespace Simple.Api.Services
             this.Dispose();
         }
 
-        public ICollection<Author> GetAllAuthors()
+        public ICollection<Author> GetAuthors()
         {
            var authors= _context.Authors.ToList();
            if(authors==null)

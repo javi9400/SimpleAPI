@@ -22,7 +22,6 @@ namespace Simple.Api
                 try
                 {
                     var context=scope.ServiceProvider.GetService<CourseLibraryContext>();
-                    context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
                 }
                 catch (Exception ex )
@@ -33,7 +32,6 @@ namespace Simple.Api
 
                 }
             }
-
             host.Run();
         } 
 

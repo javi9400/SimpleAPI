@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Simple.Api.Context;
+using Simple.Api.Services;
 
 namespace Simple.Api
 {
@@ -29,6 +30,7 @@ namespace Simple.Api
         {
             services.AddControllers();
             services.AddDbContext<CourseLibraryContext>(options=> options.UseNpgsql(Configuration.GetConnectionString("CourseLibraryHn")));
+            services.AddScoped<ICourseLibraryRepository,CourseLibraryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

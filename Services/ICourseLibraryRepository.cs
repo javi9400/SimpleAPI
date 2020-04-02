@@ -17,7 +17,7 @@ namespace Simple.Api.Services
 
         Author GetAuthor(int authorId);
 
-        ICollection<Author> GetAllAuthors();
+        ICollection<Author> GetAuthors();
 
     }
 }
