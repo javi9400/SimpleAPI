@@ -22,7 +22,20 @@ namespace Simple.Api.Controllers
         public ActionResult GetAuthors()
         {
             var authorsFromRepo=_courseLibraryRepository.GetAuthors();
-            return  new JsonResult(authorsFromRepo);
+            return Ok(authorsFromRepo);
+        }
+
+        [HttpGet("{authorId}")]
+        public ActionResult GetAuthor(int authorId)
+        {
+                var author=_courseLibraryRepository.GetAuthor(authorId);
+                
+                if(author==null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(author);
         }
 
     }

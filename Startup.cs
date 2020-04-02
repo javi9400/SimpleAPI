@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +29,13 @@ namespace Simple.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(setup=>
+            {
+                  setup.ReturnHttpNotAcceptable=true;   
+                  setup.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+            }   
+             );
+
             services.AddDbContext<CourseLibraryContext>(options=> options.UseNpgsql(Configuration.GetConnectionString("CourseLibraryHn")));
             services.AddScoped<ICourseLibraryRepository,CourseLibraryRepository>();
         }
