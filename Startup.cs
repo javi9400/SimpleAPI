@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -38,6 +40,7 @@ namespace Simple.Api
 
             services.AddDbContext<CourseLibraryContext>(options=> options.UseNpgsql(Configuration.GetConnectionString("CourseLibraryHn")));
             services.AddScoped<ICourseLibraryRepository,CourseLibraryRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +49,18 @@ namespace Simple.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                    app.UseExceptionHandler(appBuilder=>
+                    {
+                        appBuilder.Run(async context=>
+                        {
+                            context.Response.StatusCode=500;
+                            await context.Response.WriteAsync("An unexpected error happened");  //for production purposes
+                        }
+                        );
+                    });
             }
 
             app.UseRouting();

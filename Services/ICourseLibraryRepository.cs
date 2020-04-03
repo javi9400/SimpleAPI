@@ -12,8 +12,8 @@ namespace Simple.Api.Services
 
         void AddAuthor(Author author);
 
-        Course GetCourse(int courseId);
-        ICollection<Course> GetAllCourse();
+        Course GetCourse(int authorId,int courseId);
+        ICollection<Course> GetAllCourse(int authorId);
 
         Author GetAuthor(int authorId);
 

@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Simple.Api.Entities;
+using Simple.Api.Helpers;
+using Simple.Api.Models;
 using Simple.Api.Services;
 
 namespace Simple.Api.Controllers
@@ -11,22 +14,28 @@ namespace Simple.Api.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly ICourseLibraryRepository _courseLibraryRepository;
+        private readonly IMapper _mapper;
 
-        public AuthorsController(ICourseLibraryRepository repo)
+        public AuthorsController(ICourseLibraryRepository repo,IMapper mapper)
         {
             _courseLibraryRepository = repo?? throw new ArgumentNullException(nameof(repo));
+            _mapper=mapper??throw new ArgumentNullException(nameof(mapper));
         }
 
 
         [HttpGet]
-        public ActionResult GetAuthors()
+        [HttpHead]
+        public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
         {
             var authorsFromRepo=_courseLibraryRepository.GetAuthors();
-            return Ok(authorsFromRepo);
+
+            var mappedDto=_mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
+
+            return Ok(mappedDto);
         }
 
         [HttpGet("{authorId}")]
-        public ActionResult GetAuthor(int authorId)
+        public ActionResult<AuthorDto> GetAuthor(int authorId)
         {
                 var author=_courseLibraryRepository.GetAuthor(authorId);
                 
@@ -34,8 +43,9 @@ namespace Simple.Api.Controllers
                 {
                     return NotFound();
                 }
+                var mappedDto=_mapper.Map<AuthorDto>(author);
 
-                return Ok(author);
+                return Ok(mappedDto);
         }
 
     }

@@ -48,9 +48,10 @@ namespace Simple.Api.Services
           return  authors;
         }
 
-        public ICollection<Course> GetAllCourse()
+        public ICollection<Course> GetAllCourse(int authorId)
         {
-          var courses= _context.Courses.ToList();
+          var courses= _context.Courses.Where(x=> x.AuthorId==authorId).ToList();
+
            if(courses==null)
            {
                throw new ArgumentNullException();
@@ -65,9 +66,9 @@ namespace Simple.Api.Services
             return  author;
         }
 
-        public Course GetCourse(int courseId)
+        public Course GetCourse(int authorId,int courseId)
         {
-            var course= _context.Courses.Where(x=> x.CourseId==courseId).FirstOrDefault();
+            var course= _context.Courses.Where(x=> x.CourseId==courseId && x.AuthorId==authorId).FirstOrDefault();
             return course;
         }
 

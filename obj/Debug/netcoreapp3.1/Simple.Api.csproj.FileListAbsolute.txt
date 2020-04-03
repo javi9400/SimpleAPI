@@ -35,3 +35,5 @@
 /Users/javiermayorga/Documents/Dev/Simple.Api/obj/Debug/netcoreapp3.1/staticwebassets/Simple.Api.StaticWebAssets.xml
 /Users/javiermayorga/Documents/Dev/Simple.Api/obj/Debug/netcoreapp3.1/Simple.Api.dll
 /Users/javiermayorga/Documents/Dev/Simple.Api/obj/Debug/netcoreapp3.1/Simple.Api.pdb
+/Users/javiermayorga/Documents/Dev/Simple.Api/bin/Debug/netcoreapp3.1/AutoMapper.dll
+/Users/javiermayorga/Documents/Dev/Simple.Api/bin/Debug/netcoreapp3.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
